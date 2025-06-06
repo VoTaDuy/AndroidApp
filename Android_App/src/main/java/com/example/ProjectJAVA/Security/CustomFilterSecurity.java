@@ -39,7 +39,8 @@ public class CustomFilterSecurity {
         httpSecurity.csrf(customer ->customer.disable())
                 .authorizeHttpRequests(request -> request.requestMatchers(
                         "login/sign_up/**",
-                        "login/register/**").permitAll().anyRequest().authenticated())
+                        "login/register/**",
+                        "genre/get/**").permitAll().anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
