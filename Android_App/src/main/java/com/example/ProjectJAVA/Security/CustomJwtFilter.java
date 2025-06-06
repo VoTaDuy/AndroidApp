@@ -33,7 +33,7 @@ public class CustomJwtFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
 
-        filterChain.doFilter(request, response); // ✅ luôn gọi tiếp filter chain
+        filterChain.doFilter(request, response);
     }
 
     private String getTokenFromHeader(HttpServletRequest request){

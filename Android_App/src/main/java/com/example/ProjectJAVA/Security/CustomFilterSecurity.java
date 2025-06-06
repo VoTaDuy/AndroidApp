@@ -38,7 +38,7 @@ public class CustomFilterSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(customer ->customer.disable())
                 .authorizeHttpRequests(request -> request.requestMatchers(
-                        "/login/sign_up/**",
+                        "login/sign_up/**",
                         "login/register/**").permitAll().anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
