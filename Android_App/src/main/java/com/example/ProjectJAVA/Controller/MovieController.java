@@ -1,9 +1,8 @@
 package com.example.ProjectJAVA.Controller;
 
-import com.example.ProjectJAVA.Payloads.ResponseData;
-import com.example.ProjectJAVA.Service.Imp.GenreServiceImp;
+
+import com.example.ProjectJAVA.Service.Imp.MovieServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,14 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/genre")
-public class GenreController {
+@RequestMapping("/movie")
+public class MovieController {
 
     @Autowired
-    GenreServiceImp genreServiceImp;
+    MovieServiceImp movieServiceImp;
+
     @GetMapping("/get")
-    public ResponseEntity<?> getAllGenre(){
-        return new ResponseEntity<>(genreServiceImp.getGenreList(), HttpStatus.OK);
+    public ResponseEntity<?> getMovieList(){
+
+        return new ResponseEntity<>(movieServiceImp.getMovieList(), HttpStatus.OK);
     }
 
 }

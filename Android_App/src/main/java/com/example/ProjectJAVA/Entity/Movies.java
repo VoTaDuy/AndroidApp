@@ -22,6 +22,9 @@ public class Movies {
     @Column(name = "movie_time")
     private int movie_time;
 
+    @Column(name = "movie_picture")
+    private String movie_picture;
+
     @OneToMany(mappedBy = "movies")
     private List<Movie_Genres> movieGenresList;
     public int getMovie_id() {
@@ -70,5 +73,13 @@ public class Movies {
 
     public void setMovie_time(int movie_time) {
         this.movie_time = movie_time;
+    }
+
+    public String getMovie_picture() {
+        return movie_picture;
+    }
+
+    public void setMovie_picture(String movie_picture) {
+        this.movie_picture = movie_picture;
     }
 }
