@@ -10,10 +10,11 @@ import java.util.List;
 public class Genres {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = "genre_id")
     private int genre_id;
 
     @Column(name = "genre_name")
-    private String genre_name;
+    private String name;
 
     @Column(name = "description")
     private String description;
@@ -37,12 +38,20 @@ public class Genres {
         this.genre_id = genre_id;
     }
 
-    public String getGenre_name() {
-        return genre_name;
+//    public String getGenre_name() {
+//        return genre_name;
+//    }
+//
+//    public void setGenre_name(String genre_name) {
+//        this.genre_name = genre_name;
+//    }
+
+    public String getName() {
+        return name;
     }
 
-    public void setGenre_name(String genre_name) {
-        this.genre_name = genre_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

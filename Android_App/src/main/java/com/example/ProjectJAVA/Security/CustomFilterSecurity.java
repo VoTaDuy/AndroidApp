@@ -41,7 +41,10 @@ public class CustomFilterSecurity {
                         "login/sign_up/**",
                         "login/register/**",
                         "genre/get/**",
-                        "movie/get/**").permitAll().anyRequest().authenticated())
+                        "movie/get/**",
+                        "genre/get/{Id}",
+                        "movie/get/{movie_id}",
+                        "genre/create/**").permitAll().anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

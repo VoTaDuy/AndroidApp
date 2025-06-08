@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface MovieServiceImp {
     public List<MovieDTO> getMovieList();
+
+    public boolean checkMovieExist(int movie_id);
+
+    public Movies getMovieById(int movie_id);
 }

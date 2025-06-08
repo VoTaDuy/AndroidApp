@@ -37,4 +37,26 @@ public class MovieService implements MovieServiceImp
         return movieDTOList;
 
     }
+
+    @Override
+    public boolean checkMovieExist(int movie_id) {
+        Movies movies=  movieRepository.findById(movie_id)
+                .orElseThrow(() -> new RuntimeException("Can not find this Id: " + movie_id));
+        if (movies == null) return false;
+        else return true;
+    }
+
+    @Override
+    public Movies getMovieById(int movie_id) {
+        Movies movies = movieRepository.findById(movie_id).
+                orElseThrow(() -> new RuntimeException("Can not found with ID: " + movie_id));
+        if (checkMovieExist(movie_id)){
+            return movies;
+        }else {
+            System.out.println("error");
+            return null;
+        }
+
+
+    }
 }
