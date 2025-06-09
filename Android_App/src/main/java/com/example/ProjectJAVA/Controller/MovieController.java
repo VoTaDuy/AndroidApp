@@ -1,14 +1,16 @@
 package com.example.ProjectJAVA.Controller;
 
 
-import com.example.ProjectJAVA.Entity.Movies;
 import com.example.ProjectJAVA.Payloads.ResponseData;
-import com.example.ProjectJAVA.Payloads.Resquest.GenreRequest;
+import com.example.ProjectJAVA.Service.Imp.FileServiceImp;
 import com.example.ProjectJAVA.Service.Imp.MovieServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/movie")
@@ -16,6 +18,9 @@ public class MovieController {
 
     @Autowired
     MovieServiceImp movieServiceImp;
+
+    @Autowired
+    FileServiceImp fileServiceImp;
 
     @GetMapping("/get")
     public ResponseEntity<?> getMovieList(){
@@ -31,9 +36,39 @@ public class MovieController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createGenre(@RequestBody GenreRequest genreRequest){
+    public ResponseEntity<?> createMovie(@RequestParam MultipartFile file,
+                                         @RequestParam String movie_name,
+                                         @RequestParam String movie_description,
+                                         @RequestParam String movie_trailer,
+                                         @RequestParam int movie_time){
+        System.out.println("hello");
+        ResponseData responseData = new ResponseData();
+        System.out.println(file.getOriginalFilename());
+        System.out.println(movie_name);
+        System.out.println(movie_description);
+        System.out.println(movie_trailer);
+        System.out.println(movie_time);
 
-        return null;
+        boolean isSuccess = movieServiceImp.checkMovieCreate(file,movie_name,movie_description,movie_trailer,movie_time);
 
+        System.out.println(isSuccess);
+        responseData.setData(isSuccess);
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
+
+    @GetMapping("/file/{filename:.+}")
+    public ResponseEntity<?> GetFileProduct(@PathVariable String filename) {
+        Resource resource = fileServiceImp.loadFile(filename);
+
+        // Kiểm tra null
+        if (resource == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("File không tồn tại: " + filename);
+        }
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""
+                        + resource.getFilename() + "\"")
+                .body(resource);
     }
     }

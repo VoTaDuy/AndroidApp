@@ -4,9 +4,11 @@ package com.example.ProjectJAVA.Service;
 import com.example.ProjectJAVA.DTO.MovieDTO;
 import com.example.ProjectJAVA.Entity.Movies;
 import com.example.ProjectJAVA.Repository.MovieRepository;
+import com.example.ProjectJAVA.Service.Imp.FileServiceImp;
 import com.example.ProjectJAVA.Service.Imp.MovieServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,9 @@ public class MovieService implements MovieServiceImp
 {
     @Autowired
     MovieRepository movieRepository;
+
+    @Autowired
+    FileServiceImp fileServiceImp;
 
     @Override
     public List<MovieDTO> getMovieList() {
@@ -57,6 +62,36 @@ public class MovieService implements MovieServiceImp
             return null;
         }
 
+
+    }
+
+    @Override
+    public boolean checkMovieCreate(MultipartFile file,
+                                    String movie_name,
+                                    String movie_description,
+                                    String movie_trailer,
+                                    int movie_time) {
+
+        boolean isInsertSuccess = false;
+
+        try {
+            boolean isSavedFileSuccess = fileServiceImp.saveFile(file);
+            if (isSavedFileSuccess){
+                Movies movies = new Movies();
+                movies.setMovie_name(movie_name);
+                movies.setMovie_description(movie_description);
+                movies.setMovie_trailer(movie_trailer);
+                movies.setMovie_time(movie_time);
+                movies.setMovie_picture(file.getOriginalFilename());
+                movieRepository.save(movies);
+                isInsertSuccess = true;
+            }
+        }catch (Exception e){
+            System.out.println("Error" + e.getMessage());
+            return false;
+        }
+
+        return isInsertSuccess;
 
     }
 }
