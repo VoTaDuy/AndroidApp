@@ -8,15 +8,20 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface MovieServiceImp {
-    public List<MovieDTO> getMovieList();
+    List<MovieDTO> getMovieList();
 
-    public boolean checkMovieExist(int movie_id);
+    boolean checkMovieExist(int movie_id);
 
-    public Movies getMovieById(int movie_id);
+    Movies getMovieById(int movie_id);
 
-    public boolean checkMovieCreate(MultipartFile file,
+    boolean checkMovieCreate(MultipartFile file,
                                     String movie_name,
                                     String movie_description,
                                     String movie_trailer,
                                     int movie_time);
+
+
+    void addGenreToMovie(Integer movie_id, Integer genre_id);
+
+
 }

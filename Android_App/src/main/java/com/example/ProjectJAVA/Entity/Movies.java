@@ -1,8 +1,11 @@
 package com.example.ProjectJAVA.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity(name = "movies")
 public class Movies {
@@ -25,8 +28,17 @@ public class Movies {
     @Column(name = "movie_picture")
     private String movie_picture;
 
+    // Thêm method này để lấy danh sách tên thể loại
+
+    @JsonIgnore
     @OneToMany(mappedBy = "movies")
     private List<Movie_Genres> movieGenresList;
+    @JsonProperty("genres")
+    public List<String> getGenreNames() {
+        return movieGenresList.stream()
+                .map(mg -> mg.getGenres().getName())
+                .collect(Collectors.toList());
+    }
     public int getMovie_id() {
         return movie_id;
     }

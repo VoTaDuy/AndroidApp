@@ -101,7 +101,7 @@ public class FileService implements FileServiceImp {
                 logger.warn("File does not exist or is not readable: {}" , filename);
             }
         }catch (Exception e){
-            logger.error("error loading fil: {}",e.getMessage());
+            logger.error("error loading file: {}",e.getMessage());
             e.printStackTrace();
 
         }

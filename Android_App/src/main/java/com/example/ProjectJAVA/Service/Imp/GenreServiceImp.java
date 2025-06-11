@@ -7,10 +7,10 @@ import com.example.ProjectJAVA.Payloads.Resquest.GenreRequest;
 import java.util.List;
 
 public interface GenreServiceImp {
-    public List<GenreDTO> getGenreList();
-    public Genres getGenreById(int genre_id);
+    List<GenreDTO> getGenreList();
+    Genres getGenreById(int genre_id);
 
-    public boolean checkGenreExist(int genre_id);
+    boolean checkGenreExist(int genre_id);
 
-    public Boolean isCreateGenre(GenreRequest genreRequest);
+    Boolean isCreateGenre(GenreRequest genreRequest);
 }

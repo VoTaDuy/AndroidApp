@@ -46,7 +46,8 @@ public class CustomFilterSecurity {
                         "movie/get/{movie_id}",
                         "genre/create/**",
                         "movie/create",
-                        "movie/file/{filename:.+}/**").permitAll().anyRequest().authenticated())
+                        "movie/file/{filename:.+}/**",
+                        "movie/{movie_id}/genre/{genre_id}").permitAll().anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

@@ -63,7 +63,7 @@ public class MovieController {
         // Kiểm tra null
         if (resource == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("File không tồn tại: " + filename);
+                    .body("File not exist: " + filename);
         }
 
         return ResponseEntity.ok()
@@ -71,4 +71,14 @@ public class MovieController {
                         + resource.getFilename() + "\"")
                 .body(resource);
     }
+
+    @GetMapping("{movie_id}/genre/{genre_id}")
+    public ResponseEntity<?> getMovieByGenreId(@PathVariable Integer movie_id, @PathVariable Integer genre_id){
+        ResponseData responseData = new ResponseData();
+        movieServiceImp.addGenreToMovie(movie_id,genre_id);
+        responseData.setData("add genre to movie success");
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
+
+
     }
