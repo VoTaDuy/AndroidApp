@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/movie")
 public class MovieController {
@@ -81,4 +83,21 @@ public class MovieController {
     }
 
 
+    @PostMapping("/{movie_id}/add_genres")
+    public ResponseEntity<?> addGenresToMovie(@PathVariable Integer movie_id, @RequestBody List<Integer> Genre_idList){
+        ResponseData responseData = new ResponseData();
+        System.out.println("geee");
+        try {
+            for (Integer genre_id : Genre_idList){
+                movieServiceImp.addGenreToMovie(movie_id,genre_id);
+            }
+            responseData.setData("Genres added successfully");
+            return new ResponseEntity<>(responseData, HttpStatus.OK);
+        } catch (Exception e) {
+
+            responseData.setData(e.getMessage());
+            return new ResponseEntity<>(responseData, HttpStatus.BAD_REQUEST);
+        }
+
+    }
     }
