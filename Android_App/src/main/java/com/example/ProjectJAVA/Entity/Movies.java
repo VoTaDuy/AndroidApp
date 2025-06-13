@@ -33,12 +33,24 @@ public class Movies {
     @JsonIgnore
     @OneToMany(mappedBy = "movies")
     private List<Movie_Genres> movieGenresList;
+
+    @OneToMany(mappedBy = "movies")
+    private List<Showtimes> showtimesList;
     @JsonProperty("genres")
     public List<String> getGenreNames() {
         return movieGenresList.stream()
                 .map(mg -> mg.getGenres().getName())
                 .collect(Collectors.toList());
     }
+
+    public List<Showtimes> getShowtimesList() {
+        return showtimesList;
+    }
+
+    public void setShowtimesList(List<Showtimes> showtimesList) {
+        this.showtimesList = showtimesList;
+    }
+
     public int getMovie_id() {
         return movie_id;
     }
