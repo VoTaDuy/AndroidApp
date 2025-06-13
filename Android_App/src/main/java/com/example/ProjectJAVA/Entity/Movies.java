@@ -1,5 +1,6 @@
 package com.example.ProjectJAVA.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -28,13 +29,12 @@ public class Movies {
     @Column(name = "movie_picture")
     private String movie_picture;
 
-    // Thêm method này để lấy danh sách tên thể loại
-
     @JsonIgnore
     @OneToMany(mappedBy = "movies")
     private List<Movie_Genres> movieGenresList;
 
     @OneToMany(mappedBy = "movies")
+    @JsonBackReference
     private List<Showtimes> showtimesList;
     @JsonProperty("genres")
     public List<String> getGenreNames() {

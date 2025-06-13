@@ -1,5 +1,7 @@
 package com.example.ProjectJAVA.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Time;
@@ -11,7 +13,7 @@ public class Showtimes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int showtimes_id;
+    private int showtime_id;
 
     @Column(name = "start_time")
     private LocalTime start_time;
@@ -20,21 +22,21 @@ public class Showtimes {
     private LocalTime end_time;
 
     @ManyToOne
-
     @JoinColumn(name = "room_id", referencedColumnName = "room_id")
     private Rooms room;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "movie_id")
     private Movies movies;
 
 
-    public int getShowtimes_id() {
-        return showtimes_id;
+    public int getShowtime_id() {
+        return showtime_id;
     }
 
-    public void setShowtimes_id(int showtimes_id) {
-        this.showtimes_id = showtimes_id;
+    public void setShowtime_id(int showtime_id) {
+        this.showtime_id = showtime_id;
     }
 
     public LocalTime getStart_time() {
