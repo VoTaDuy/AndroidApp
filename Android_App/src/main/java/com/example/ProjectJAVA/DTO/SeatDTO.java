@@ -9,7 +9,7 @@ public class SeatDTO {
 
     private int room_id;
     private char row_seat;
-    private SeatStatus seat_status;
+
 
 
     public int getSeat_id() {
@@ -44,12 +44,5 @@ public class SeatDTO {
         this.row_seat = row_seat;
     }
 
-    public SeatStatus getSeat_status() {
-        return seat_status;
-    }
-
-    public void setSeat_status(SeatStatus seat_status) {
-        this.seat_status = seat_status;
-    }
 }
 

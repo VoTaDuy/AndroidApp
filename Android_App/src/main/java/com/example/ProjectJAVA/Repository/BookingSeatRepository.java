@@ -12,5 +12,11 @@ import java.util.List;
 @Repository
 public interface BookingSeatRepository  extends JpaRepository<BookingSeats, Integer> {
 
+    @Query("SELECT COUNT(bs) > 0 FROM BookingSeats bs " +
+            "WHERE bs.seats.id IN :seatIds " +
+            "AND bs.bookings.showtimes.id = :showtimeId " +
+            "AND bs.bookings.bookingStatus = 'BOOKED'")
+    boolean isSeatAlreadyBooked(@Param("seatIds") List<Integer> seatIds,
+                                @Param("showtimeId") Integer showtimeId);
 
 }

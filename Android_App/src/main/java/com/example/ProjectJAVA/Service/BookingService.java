@@ -29,6 +29,9 @@ public class BookingService implements BookingServiceImp {
     @Autowired
     ShowtimeRepository showtimeRepository;
 
+    @Autowired
+    BookingSeatRepository bookingseatRepository;
+
 
     @Override
     public Bookings createBooking(BookingRequest bookingRequest) {
@@ -39,7 +42,9 @@ public class BookingService implements BookingServiceImp {
                 .findById(bookingRequest.getShowtimeId()).orElseThrow(() -> new RuntimeException("showtime not found with ID: " + bookingRequest.getShowtimeId() ));
 
         Rooms rooms = showtimes.getRooms();
-
+        if (bookingseatRepository.isSeatAlreadyBooked(bookingRequest.getSeatIds(), bookingRequest.getShowtimeId())) {
+            throw new RuntimeException("Ghế đã có người đặt trước rồi!");
+        }
         LocalDateTime startTime = showtimes.getStartTime();
         LocalDateTime endTime = showtimes.getEndTime();
 
