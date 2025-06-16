@@ -51,7 +51,9 @@ public class CustomFilterSecurity {
                         "movie/{movie_id}/add_genres/**",
                         "room/get",
                         "seat/get",
-                        "showtime/get").permitAll().anyRequest().authenticated())
+                        "showtime/get",
+                        "booking/check-booked-seats",
+                        "booking/create/**").permitAll().anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

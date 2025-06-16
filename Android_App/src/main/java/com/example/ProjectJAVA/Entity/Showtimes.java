@@ -1,11 +1,15 @@
 package com.example.ProjectJAVA.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "showtimes")
@@ -13,17 +17,29 @@ public class Showtimes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int showtime_id;
+    private int showtimeId;
 
     @Column(name = "start_time")
-    private LocalTime start_time;
+    private LocalDateTime startTime;
 
     @Column(name = "end_time")
-    private LocalTime end_time;
+    private LocalDateTime endTime;
 
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "room_id")
-    private Rooms room;
+    private Rooms rooms;
+
+    @OneToMany (mappedBy = "showtimes", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Bookings> bookingsList;
+
+    public List<Bookings> getBookingsList() {
+        return bookingsList;
+    }
+
+    public void setBookingsList(List<Bookings> bookingsList) {
+        this.bookingsList = bookingsList;
+    }
 
     @ManyToOne
     @JsonManagedReference
@@ -31,36 +47,36 @@ public class Showtimes {
     private Movies movies;
 
 
-    public int getShowtime_id() {
-        return showtime_id;
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
-    public void setShowtime_id(int showtime_id) {
-        this.showtime_id = showtime_id;
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 
-    public LocalTime getStart_time() {
-        return start_time;
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
-    public void setStart_time(LocalTime start_time) {
-        this.start_time = start_time;
+    public void setEndTime(LocalDateTime endTime) {
+        endTime = endTime;
     }
 
-    public LocalTime getEnd_time() {
-        return end_time;
+    public int getShowtimeId() {
+        return showtimeId;
     }
 
-    public void setEnd_time(LocalTime end_time) {
-        this.end_time = end_time;
+    public void setShowtimeId(int showtimeId) {
+        this.showtimeId = showtimeId;
     }
 
-    public Rooms getRoom() {
-        return room;
+    public Rooms getRooms() {
+        return rooms;
     }
 
-    public void setRoom(Rooms room) {
-        this.room = room;
+    public void setRooms(Rooms rooms) {
+        this.rooms = rooms;
     }
 
     public Movies getMovies() {

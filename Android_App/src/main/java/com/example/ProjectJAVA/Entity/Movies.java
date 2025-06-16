@@ -29,6 +29,17 @@ public class Movies {
     @Column(name = "movie_picture")
     private String movie_picture;
 
+    @Column(name = "movie_price")
+    private int movie_price;
+
+    public int getMovie_price() {
+        return movie_price;
+    }
+
+    public void setMovie_price(int movie_price) {
+        this.movie_price = movie_price;
+    }
+
     @JsonIgnore
     @OneToMany(mappedBy = "movies")
     private List<Movie_Genres> movieGenresList;

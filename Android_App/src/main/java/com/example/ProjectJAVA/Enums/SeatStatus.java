@@ -1,6 +1,8 @@
 package com.example.ProjectJAVA.Enums;
 
 public enum SeatStatus {
-    AVAILABLE,
-    BOOKED
+        BOOKED,
+        CANCELLED
+
+
 }

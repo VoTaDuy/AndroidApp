@@ -1,7 +1,10 @@
 package com.example.ProjectJAVA.Entity;
 
 import com.example.ProjectJAVA.Enums.SeatStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "seats")
@@ -9,14 +12,15 @@ public class Seats {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int seat_id;
+    private int seatId;
 
     @Column(name = "row_seat")
     private char row_seat;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "seat_status")
-    private SeatStatus seat_status = SeatStatus.AVAILABLE ;
+
+    @OneToMany(mappedBy = "seats", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<BookingSeats> bookingSeatsList;
 
     @Column(name = "seat_number")
     private int seat_number;
@@ -27,14 +31,6 @@ public class Seats {
 
     public void setRooms(Rooms rooms) {
         this.rooms = rooms;
-    }
-
-    public SeatStatus getSeat_status() {
-        return seat_status;
-    }
-
-    public void setSeat_status(SeatStatus seat_status) {
-        this.seat_status = seat_status;
     }
 
     public char getRow_seat() {
@@ -49,13 +45,12 @@ public class Seats {
     @JoinColumn(name = "room_id")
     private Rooms rooms;
 
-
-    public int getSeat_id() {
-        return seat_id;
+    public int getSeatId() {
+        return seatId;
     }
 
-    public void setSeat_id(int seat_id) {
-        this.seat_id = seat_id;
+    public void setSeatId(int seatId) {
+        this.seatId = seatId;
     }
 
     public int getSeat_number() {

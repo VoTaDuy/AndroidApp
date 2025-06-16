@@ -1,6 +1,7 @@
 package com.example.ProjectJAVA.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -24,9 +25,30 @@ public class Rooms {
 
 
     @OneToMany(mappedBy = "rooms", cascade = CascadeType.ALL)
+    @JsonBackReference
     List<Seats> seatsList;
 
+    @OneToMany(mappedBy = "rooms", cascade = CascadeType.ALL)
+    @JsonBackReference
 
+    List<Showtimes> showtimesList;
+
+
+    public List<Seats> getSeatsList() {
+        return seatsList;
+    }
+
+    public void setSeatsList(List<Seats> seatsList) {
+        this.seatsList = seatsList;
+    }
+
+    public List<Showtimes> getShowtimesList() {
+        return showtimesList;
+    }
+
+    public void setShowtimesList(List<Showtimes> showtimesList) {
+        this.showtimesList = showtimesList;
+    }
 
     public int getRoom_id() {
         return room_id;

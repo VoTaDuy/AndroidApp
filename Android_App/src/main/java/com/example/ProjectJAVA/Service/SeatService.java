@@ -23,10 +23,9 @@ public class SeatService implements SeatServiceImp {
         for (Seats seats : seatsList){
             SeatDTO seatDTO = new SeatDTO();
 
-            seatDTO.setSeat_id(seats.getSeat_id());
+            seatDTO.setSeat_id(seats.getSeatId());
             seatDTO.setSeat_number(seats.getSeat_number());
             seatDTO.setRow_seat(seats.getRow_seat());
-            seatDTO.setSeat_status(seats.getSeat_status());
             seatDTO.setRoom_id(seats.getRooms().getRoom_id());
             seatDTOList.add(seatDTO);
         }

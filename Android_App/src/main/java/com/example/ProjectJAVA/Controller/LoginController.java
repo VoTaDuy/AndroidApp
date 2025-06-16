@@ -42,7 +42,7 @@ public class LoginController {
         if (users != null){
             String token = jwtUtilHelper.GenerateToken(users.getUsername());
             Map<String, Object> data = new HashMap<>();
-            data.put("userId", users.getUser_id());
+            data.put("userId", users.getUserId());
             data.put("username", users.getUsername());
             data.put("token",token);
             responseData.setData(data);

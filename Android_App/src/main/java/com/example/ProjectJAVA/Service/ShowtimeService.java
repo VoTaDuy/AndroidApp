@@ -22,11 +22,11 @@ public class ShowtimeService implements ShowtimeServiceImp {
         List<ShowtimeDTO> showtimeDTOList = new ArrayList<>();
         for (Showtimes showtimes : showtimesList){
             ShowtimeDTO showtimeDTO = new ShowtimeDTO();
-            showtimeDTO.setShowtime_id(showtimes.getShowtime_id());
+            showtimeDTO.setShowtime_id(showtimes.getShowtimeId());
             showtimeDTO.setMovie_id(showtimes.getMovies().getMovie_id());
-            showtimeDTO.setRoom_id(showtimes.getRoom().getRoom_id());
-            showtimeDTO.setStart_time(showtimes.getStart_time());
-            showtimeDTO.setEnd_time(showtimes.getEnd_time());
+            showtimeDTO.setRoom_id(showtimes.getRooms().getRoom_id());
+            showtimeDTO.setStart_time(showtimes.getStartTime());
+            showtimeDTO.setEnd_time(showtimes.getEndTime());
             showtimeDTOList.add(showtimeDTO);
         }
         return showtimeDTOList;

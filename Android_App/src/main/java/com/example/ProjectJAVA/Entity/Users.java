@@ -1,16 +1,18 @@
 package com.example.ProjectJAVA.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "users")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long user_id;
+    private Integer userId;
 
     @Column(name = "created_Date")
     private Date created_Date;
@@ -28,15 +30,28 @@ public class Users {
     private User_Details userDetails;
 
 
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @JsonBackReference
+    List<Bookings> bookingsList;
+
+
     @Column(name="username")
     private String username;
 
-    public long getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public List<Bookings> getBookingsList() {
+        return bookingsList;
+    }
+
+    public void setBookingsList(List<Bookings> bookingsList) {
+        this.bookingsList = bookingsList;
     }
 
     public Date getCreated_Date() {
