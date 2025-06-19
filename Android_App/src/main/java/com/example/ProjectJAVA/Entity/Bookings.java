@@ -84,6 +84,7 @@ public class Bookings {
         return bookingSeatsList;
     }
 
+
     public void setBookingSeatsList(List<BookingSeats> bookingSeatsList) {
         this.bookingSeatsList = bookingSeatsList;
     }

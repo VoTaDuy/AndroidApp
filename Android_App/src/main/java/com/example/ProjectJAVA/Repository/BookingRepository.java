@@ -19,6 +19,8 @@ public interface BookingRepository extends JpaRepository<Bookings, Integer> {
     List<Integer> findBookedSeatIdsForShowtime(@Param("showtimeId") Integer showtimeId,
                                                @Param("seatIds") List<Integer> seatIds);
 
+
+
     @Query("SELECT COUNT(b) FROM Bookings b " +
             "WHERE b.users.userId = :userId " +
             "AND b.bookingStatus != 'CANCELLED' " +

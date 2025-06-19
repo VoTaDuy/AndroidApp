@@ -65,8 +65,6 @@ public class BookingService implements BookingServiceImp {
             BookingSeats seat = new BookingSeats();
             seat.setStatus(SeatStatus.valueOf("BOOKED"));
             seat.setBookings(booking);
-
-            // Optional: load seat entity từ seatRepository nếu cần
             Seats seatEntity = seatRepository.findById(seatId)
                     .orElseThrow(() -> new RuntimeException("Seat not found with id: " + seatId));
             seat.setSeats(seatEntity);
@@ -76,13 +74,14 @@ public class BookingService implements BookingServiceImp {
 
         booking.setBookingSeatsList(seatList);
 
+        Integer pricePerSeat = showtimes.getMovies().getMovie_price();
+        int totalPrice = pricePerSeat != null ? pricePerSeat * bookingRequest.getSeatIds().size() : 0;
+        booking.setPrice(totalPrice);
+
+
         return bookingRepository.save(booking);
 
     }
-
-
-
-
         public List<Integer> getAlreadyBookedSeatIds(Integer showtimeId, List<Integer> seatIds) {
             return bookingRepository.findBookedSeatIdsForShowtime(showtimeId, seatIds);
     }

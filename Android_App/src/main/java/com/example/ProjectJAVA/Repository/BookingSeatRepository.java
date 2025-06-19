@@ -19,4 +19,5 @@ public interface BookingSeatRepository  extends JpaRepository<BookingSeats, Inte
     boolean isSeatAlreadyBooked(@Param("seatIds") List<Integer> seatIds,
                                 @Param("showtimeId") Integer showtimeId);
 
+
 }
