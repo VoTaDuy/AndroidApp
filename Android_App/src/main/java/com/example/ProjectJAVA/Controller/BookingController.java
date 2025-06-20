@@ -2,6 +2,7 @@ package com.example.ProjectJAVA.Controller;
 
 
 import com.example.ProjectJAVA.Entity.Bookings;
+import com.example.ProjectJAVA.Payloads.ResponseData;
 import com.example.ProjectJAVA.Payloads.Resquest.BookingRequest;
 import com.example.ProjectJAVA.Service.BookingService;
 import jakarta.validation.Valid;
@@ -42,6 +43,13 @@ public class BookingController {
         List<Integer> bookedSeatIds = bookingService.getAlreadyBookedSeatIds(showtimeId, seatIds);
         return ResponseEntity.ok(bookedSeatIds);
     }
+
+    @GetMapping("/get/{userId}")
+    private ResponseEntity<?> getBookingList(@PathVariable Integer userId){
+
+            return new ResponseEntity<>(bookingService.getBookingByUserId(userId), HttpStatus.OK);
+    }
+
 
 
 }

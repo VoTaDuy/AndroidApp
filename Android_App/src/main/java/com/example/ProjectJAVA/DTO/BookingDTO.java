@@ -11,6 +11,16 @@ public class BookingDTO {
 
     private int showtime_id;
 
+    private int price;
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     private BookingStatus booking_status;
 
     public int getBooking_id() {

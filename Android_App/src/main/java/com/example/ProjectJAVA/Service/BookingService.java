@@ -1,5 +1,6 @@
 package com.example.ProjectJAVA.Service;
 
+import com.example.ProjectJAVA.DTO.BookingDTO;
 import com.example.ProjectJAVA.Entity.*;
 import com.example.ProjectJAVA.Enums.BookingStatus;
 import com.example.ProjectJAVA.Enums.SeatStatus;
@@ -82,7 +83,31 @@ public class BookingService implements BookingServiceImp {
         return bookingRepository.save(booking);
 
     }
-        public List<Integer> getAlreadyBookedSeatIds(Integer showtimeId, List<Integer> seatIds) {
+
+    @Override
+    public List<BookingDTO> getBookingByUserId(Integer userId) {
+        Users users = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
+        List<Bookings> bookings = bookingRepository.findAllByUsers(users);
+        List<BookingDTO> bookingDTOList = new ArrayList<>();
+        for (Bookings booking : bookings) {
+            BookingDTO bookingDTO = new BookingDTO();
+            bookingDTO.setBooking_id(booking.getBooking_id());
+            bookingDTO.setUser_id(booking.getUsers().getUserId());
+            bookingDTO.setBooking_status(booking.getBookingStatus());
+            bookingDTO.setPrice(booking.getPrice());
+            bookingDTO.setShowtime_id(booking.getShowtimes().getShowtimeId());
+            bookingDTO.setRoom_id(booking.getShowtimes().getRooms().getRoom_id());
+
+            bookingDTOList.add(bookingDTO);
+        }
+
+        return bookingDTOList;
+
+    }
+
+    public List<Integer> getAlreadyBookedSeatIds(Integer showtimeId, List<Integer> seatIds) {
             return bookingRepository.findBookedSeatIdsForShowtime(showtimeId, seatIds);
     }
 

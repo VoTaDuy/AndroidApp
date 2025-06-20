@@ -32,6 +32,7 @@ public interface BookingRepository extends JpaRepository<Bookings, Integer> {
                                          @Param("endTime") LocalDateTime endTime);
 
 
+    List<Bookings> findAllByUsers(Users users);
 
 
 }
