@@ -53,7 +53,8 @@ public class CustomFilterSecurity {
                         "seat/get",
                         "showtime/get",
                         "booking/check-booked-seats",
-                        "booking/create/**").permitAll().anyRequest().authenticated())
+                        "booking/create/**",
+                        "payment/fake").permitAll().anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

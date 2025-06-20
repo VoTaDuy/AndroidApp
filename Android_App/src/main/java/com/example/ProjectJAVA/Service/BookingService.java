@@ -56,14 +56,14 @@ public class BookingService implements BookingServiceImp {
         Bookings booking = new Bookings();
         booking.setUsers(users);
         booking.setShowtimes(showtimes);
-        booking.setBookingStatus(BookingStatus.valueOf("BOOKED"));
+        booking.setBookingStatus(BookingStatus.valueOf("PENDING"));
 
         Integer price = showtimes.getMovies().getMovie_price();
         booking.setPrice(price != null ? price : 0);
         List<BookingSeats> seatList = new ArrayList<>();
         for (Integer seatId : bookingRequest.getSeatIds()) {
             BookingSeats seat = new BookingSeats();
-            seat.setStatus(SeatStatus.valueOf("BOOKED"));
+            seat.setStatus(SeatStatus.valueOf("PENDING"));
             seat.setBookings(booking);
             Seats seatEntity = seatRepository.findById(seatId)
                     .orElseThrow(() -> new RuntimeException("Seat not found with id: " + seatId));
