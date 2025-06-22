@@ -2,6 +2,9 @@ package com.example.ProjectJAVA.DTO;
 
 import com.example.ProjectJAVA.Enums.BookingStatus;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class BookingDTO {
     private int booking_id;
 
@@ -12,6 +15,10 @@ public class BookingDTO {
     private int showtime_id;
 
     private int price;
+
+    private LocalDateTime start_time;
+
+    private LocalDateTime end_time;
 
     public int getPrice() {
         return price;
@@ -59,7 +66,25 @@ public class BookingDTO {
         return booking_status;
     }
 
+    public LocalDateTime getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(LocalDateTime start_time) {
+        this.start_time = start_time;
+    }
+
+    public LocalDateTime getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(LocalDateTime end_time) {
+        this.end_time = end_time;
+    }
+
     public void setBooking_status(BookingStatus booking_status) {
         this.booking_status = booking_status;
     }
+
+
 }

@@ -98,6 +98,8 @@ public class BookingService implements BookingServiceImp {
             bookingDTO.setBooking_status(booking.getBookingStatus());
             bookingDTO.setPrice(booking.getPrice());
             bookingDTO.setShowtime_id(booking.getShowtimes().getShowtimeId());
+            bookingDTO.setStart_time(booking.getShowtimes().getStartTime());
+            bookingDTO.setEnd_time(booking.getShowtimes().getEndTime());
             bookingDTO.setRoom_id(booking.getShowtimes().getRooms().getRoom_id());
 
             bookingDTOList.add(bookingDTO);

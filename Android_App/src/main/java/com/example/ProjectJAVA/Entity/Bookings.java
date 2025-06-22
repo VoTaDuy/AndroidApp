@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -87,5 +88,13 @@ public class Bookings {
 
     public void setBookingSeatsList(List<BookingSeats> bookingSeatsList) {
         this.bookingSeatsList = bookingSeatsList;
+    }
+
+    public LocalDateTime getStart_time() {
+        return showtimes.getStartTime();
+    }
+
+    public LocalDateTime getEnd_time() {
+        return showtimes.getEndTime();
     }
 }
