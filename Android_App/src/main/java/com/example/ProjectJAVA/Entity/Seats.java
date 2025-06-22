@@ -49,6 +49,10 @@ public class Seats {
         return seatId;
     }
 
+    public String getSeatName() {
+        return String.format("%c%d", row_seat, seat_number);
+    }
+
     public void setSeatId(int seatId) {
         this.seatId = seatId;
     }

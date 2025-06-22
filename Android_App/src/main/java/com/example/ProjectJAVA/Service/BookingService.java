@@ -49,10 +49,10 @@ public class BookingService implements BookingServiceImp {
         LocalDateTime startTime = showtimes.getStartTime();
         LocalDateTime endTime = showtimes.getEndTime();
 
-        long count = bookingRepository.countOverlappingBookingsForUser(bookingRequest.getUserId(), startTime, endTime);
-        if (count > 0) {
-            throw new RuntimeException("User already has a booking that overlaps with this showtime.");
-        }
+//        long count = bookingRepository.countOverlappingBookingsForUser(bookingRequest.getUserId(), startTime, endTime);
+//        if (count > 0) {
+//            throw new RuntimeException("User already has a booking that overlaps with this showtime.");
+//        }
 
         Bookings booking = new Bookings();
         booking.setUsers(users);

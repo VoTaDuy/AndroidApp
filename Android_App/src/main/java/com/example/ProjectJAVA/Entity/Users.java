@@ -3,6 +3,7 @@ package com.example.ProjectJAVA.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -22,10 +23,12 @@ public class Users {
 
     @JsonIgnore
     @ManyToOne
+
     @JoinColumn(name= "role_id")
     private Roles roles;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     @JoinColumn(name ="user_id", referencedColumnName = "user_id")
     private User_Details userDetails;
 

@@ -1,5 +1,6 @@
 package com.example.ProjectJAVA.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -23,6 +24,7 @@ public class User_Details {
     private String name;
 
     @OneToOne
+    @JsonBackReference
     @JoinColumn(name = "user_id")
     private Users user;
 
